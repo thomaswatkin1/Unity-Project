@@ -45,7 +45,7 @@ public class GroundFall : MonoBehaviour
                 { 
                     Vector2 oPos = o.transform.position;
                     oPos.y -= fallAmount;
-                    o.transform.position = pos;
+                    o.transform.position = oPos;
                 }
             }
             transform.position = pos;

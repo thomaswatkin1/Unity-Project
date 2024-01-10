@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         if (pos.y < -20)
         {
             isDead = true;
+            velocity.x = 0;
 
         }
 
@@ -125,8 +126,8 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-            Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red);
 
+            Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red);
 
             Vector2 wallOrigin = new Vector2(pos.x, pos.y);
             RaycastHit2D wallHit = Physics2D.Raycast(wallOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, groundLayerMask);
@@ -157,7 +158,6 @@ public class Player : MonoBehaviour
             {
                 velocity.x = maxXVelocity;
             }
-
 
             Vector2 rayOrigin = new Vector2(pos.x - 0.7f, pos.y);
             Vector2 rayDirection = Vector2.up;
