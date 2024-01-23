@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public float shakeDistance = 0.1f;
+    public float shakeDistance = 0.3f;
     public float shakeSpeed = 1;
 
     Vector3 initialPosition;

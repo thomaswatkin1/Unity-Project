@@ -23,6 +23,6 @@ public class UIControllerTitle : MonoBehaviour
 
     public void Tutorial()
     {
-        return;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HowToPlay");
     }
 }

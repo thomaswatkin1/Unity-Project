@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: OK
+  m_Text: Done
 --- !u!222 &286353619
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -285,9 +285,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 0608df1b693551a478de3278264427a5, type: 3}
-        m_TargetAssemblyTypeName: UIControllerTitle, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1230743066}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -369,7 +369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -167, y: 166}
+  m_AnchoredPosition: {x: -167, y: 174.9}
   m_SizeDelta: {x: 10, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618778376
@@ -393,10 +393,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Your aim is to run as far as possible.\n\nPress the spacebar to jump between
-    platforms. \n\nYour speed will increase automatically, but if you hit an obstacle
-    you will lose some speed.\n\nThe next gap depends on your speed when you land.\nIf
-    you then hit an obstacle and slow down, you may not be able to make it. \n\nHave
-    fun!"
+    buildings. \n\nYour speed will increase automatically whenever you're on the
+    ground, but if you hit an obstacle you will lose some speed.\n\nThe gap before
+    the next building depends on your landing speed. If you then hit an obstacle
+    and slow down, you may not be able to make it. \n\nHave fun!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 26.5
+  m_fontSizeBase: 26.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1230743061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0608df1b693551a478de3278264427a5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc766124e0514324f8344f5b4ce98cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1606673980

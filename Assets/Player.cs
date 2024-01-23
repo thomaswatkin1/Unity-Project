@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded || groundDistance <= jumpGroundThreshold)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && groundDistance <= maxJumpDistance)
+            if (Input.GetKey(KeyCode.Space) && groundDistance <= maxJumpDistance && isGrounded)
             {
                 isGrounded = false;
                 velocity.y = jumpVelocity;
