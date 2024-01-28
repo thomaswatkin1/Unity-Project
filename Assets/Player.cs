@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator animator;
+    public float temp = 0;
 
     public float gravity;
     public Vector2 velocity;
@@ -28,7 +30,6 @@ public class Player : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
 
-    GroundFall fall;
     CameraController cameraController;
 
     void Start()
@@ -39,6 +40,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        animator.SetFloat("speed", velocity.x);
+        animator.SetBool("grounded", isGrounded);
+
         Vector2 pos = transform.position;
         float groundDistance = Mathf.Abs(pos.y - groundHeight);
 
@@ -51,12 +55,12 @@ public class Player : MonoBehaviour
                 isHoldingJump = true;
                 holdJumpTimer = 0;
 
-                if (fall != null)
-                {
-                    fall.player = null;
-                    fall = null;
-                    cameraController.StopShaking();
-                }
+                // if (fall != null)
+                // {
+                //     fall.player = null;
+                //     fall = null;
+                //     cameraController.StopShaking();
+                // }
             }
         }
 
@@ -78,13 +82,24 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (pos.y < -20)
+        if (pos.y < -40)
         {
             isDead = true;
             velocity.x = 0;
 
         }
 
+
+        if (temp > pos.y)
+        {
+            animator.SetBool("fallingdownwards", true);
+        }
+        else
+        {
+            animator.SetBool("fallingdownwards", false);
+        }
+        temp = pos.y;
+        
         if (!isGrounded)
         {
             if (isHoldingJump)
@@ -120,12 +135,12 @@ public class Player : MonoBehaviour
                         isGrounded = true;
                     }
 
-                    fall = ground.GetComponent<GroundFall>();
-                    if (fall != null)
-                    {
-                        fall.player = this;
-                        cameraController.StartShaking();
-                    }
+                    // fall = ground.GetComponent<GroundFall>();
+                    // if (fall != null)
+                    // {
+                    //     fall.player = this;
+                    //     // cameraController.StartShaking();
+                    // }
                 }
             }
 
@@ -164,10 +179,10 @@ public class Player : MonoBehaviour
             Vector2 rayOrigin = new Vector2(pos.x - 0.7f, pos.y);
             Vector2 rayDirection = Vector2.up;
             float rayDistance = velocity.y * Time.fixedDeltaTime;
-            if (fall != null)
-            {
-                rayDistance = -fall.fallSpeed * Time.fixedDeltaTime;
-            }
+            // if (fall != null)
+            // {
+            //     rayDistance = -fall.fallSpeed * Time.fixedDeltaTime;
+            // }
             RaycastHit2D hit2D = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance, groundLayerMask);
             if (hit2D.collider == null)
             {

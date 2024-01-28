@@ -9,7 +9,7 @@ public class Ground : MonoBehaviour
     public float groundHeight;
     public float groundRight;
     public float screenRight;
-    BoxCollider2D collider;
+    new BoxCollider2D collider;
 
     bool didGenerateGround = false;
 
@@ -21,12 +21,6 @@ public class Ground : MonoBehaviour
 
         collider = GetComponent<BoxCollider2D>();
         screenRight = Camera.main.transform.position.x * 2;
-    }
-
-
-    void Start()
-    {
-            
     }
 
     // Update is called once per frame
@@ -73,7 +67,7 @@ public class Ground : MonoBehaviour
         float maxJumpHeight = h1 + h2;
         float maxY = maxJumpHeight * 0.5f;
         maxY += groundHeight;
-        float minY = 1;
+        float minY = 3;
         float actualY = Random.Range(minY, maxY);
 
         pos.y = actualY - goCollider.size.y / 2;
@@ -95,18 +89,18 @@ public class Ground : MonoBehaviour
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (goCollider.size.y / 2);
 
-        GroundFall fall = go.GetComponent<GroundFall>();
-        if (fall != null)
-        {
-            Destroy(fall);
-            fall = null;
-        }
+        // GroundFall fall = go.GetComponent<GroundFall>();
+        // if (fall != null)
+        // {
+        //     Destroy(fall);
+        //     fall = null;
+        // }
 
-        if (Random.Range(0,3) == 0)
-        {
-            fall = go.AddComponent<GroundFall>();
-            fall.fallSpeed = Random.Range(1.0f, 3.0f);
-        }
+        // if (Random.Range(0,3) == 0)
+        // {
+        //     fall = go.AddComponent<GroundFall>();
+        //     fall.fallSpeed = Random.Range(1.0f, 3.0f);
+        // }
 
 
         int obstacleNum = Random.Range(0, 4);
@@ -117,16 +111,16 @@ public class Ground : MonoBehaviour
             float halfWidth = goCollider.size.x / 2 - 1;
             float left = go.transform.position.x - halfWidth;
             float right = go.transform.position.x + halfWidth;
-            float x = Random.Range(left, right);
+            float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+            float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
             Vector2 boxPos = new Vector2(x, y);
             box.transform.position = boxPos;
 
-            if (fall != null)
-            {
-                Obstacle o = box.GetComponent<Obstacle>();
-                fall.obstacles.Add(o);
-            }
+            // if (fall != null)
+            // {
+            //     Obstacle o = box.GetComponent<Obstacle>();
+            //     fall.obstacles.Add(o);
+            // }
         }        
     }
-
 }

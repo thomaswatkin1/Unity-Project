@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    Player player;
-    Text distanceText;
+    [SerializeField] private CanvasGroup canvasgroup;
 
+    Player player;
+    TextMeshProUGUI distanceText;   
     GameObject results;
-    Text finalDistanceText;
+    TextMeshProUGUI finalDistanceText;
+    private bool fadeIn = false;
 
 
     private void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
-        distanceText = GameObject.Find("DistanceText").GetComponent<Text>();
-        
-        finalDistanceText = GameObject.Find("FinalDistanceText").GetComponent<Text>();
+        player = GameObject.Find("Player")?.GetComponent<Player>();
+        distanceText = GameObject.Find("DistanceText")?.GetComponent<TextMeshProUGUI>();         
+        finalDistanceText = GameObject.Find("FinalDistance")?.GetComponent<TextMeshProUGUI>();
         results = GameObject.Find("Results");
-        results.SetActive(false);
-
-
     }
 
     // Start is called before the first frame update
@@ -32,16 +31,60 @@ public class UIController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        UpdateDistanceText();
+        CheckPlayerStatus();
+
+        if (fadeIn)
+        {
+            if(canvasgroup.alpha < 1)
+            {
+                canvasgroup.alpha += Time.deltaTime * 1.3f;
+                if(canvasgroup.alpha >= 1)
+                {
+                    fadeIn = false;
+                }
+            }
+        }
+    }
+
+    private void UpdateDistanceText()
+    {
+        if (distanceText != null)
+        {
+            int distance = Mathf.FloorToInt(player.distance);
+            distanceText.text = distance + " m";
+        }
+
+    }
+
+    private void CheckPlayerStatus()
+    {
+        if (player != null)
+        {
+            if (player.isDead)
+            {
+                results.SetActive(true);
+                FadeIn();
+                UpdateFinalDistanceText();
+            }
+            else
+            {
+                results.SetActive(false);
+            }
+        }
+    }
+
+    private void UpdateFinalDistanceText()
     {
         int distance = Mathf.FloorToInt(player.distance);
-        distanceText.text = distance + " m";
+        finalDistanceText.text = distance + " m";
+    }
 
-        if (player.isDead)
-        {
-            results.SetActive(true);
-            finalDistanceText.text = distance + " m";
-        }
+    public void FadeIn()
+    {
+        fadeIn = true;
     }
 
     public void Quit()
@@ -51,6 +94,6 @@ public class UIController : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main Game");
     }
 }

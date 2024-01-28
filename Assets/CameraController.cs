@@ -22,30 +22,34 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isShaking)
+        if (!GameObject.Find("Player").GetComponent<Player>().isDead)
         {
-            Vector3 pos = transform.position;
-            Vector3 offsetPos = pos + shakeOffset;
-            float currentDistance = offsetPos.y - initialPosition.y;
-            if (shakeSpeed >= 0)
+            if (isShaking)
             {
-                if (currentDistance > shakeDistance)
+                Vector3 pos = transform.position;
+                Vector3 offsetPos = pos + shakeOffset;
+                float currentDistance = offsetPos.y - initialPosition.y;
+                if (shakeSpeed >= 0)
                 {
-                    shakeSpeed *= -1;
+                    if (currentDistance > shakeDistance)
+                    {
+                        shakeSpeed *= -1;
+                    }
                 }
-            }
-            else
-            {
-                if (currentDistance < -shakeDistance)
+                else
                 {
-                    shakeSpeed *= -1;
+                    if (currentDistance < -shakeDistance)
+                    {
+                        shakeSpeed *= -1;
+                    }
                 }
+                shakeOffset.y += shakeSpeed * Time.deltaTime;
+                if (shakeOffset.y > shakeDistance) shakeOffset.y = shakeDistance;
+                if (shakeOffset.y < -shakeDistance) shakeOffset.y = -shakeDistance;
+                transform.position = initialPosition + shakeOffset;
             }
-            shakeOffset.y += shakeSpeed * Time.deltaTime;
-            if (shakeOffset.y > shakeDistance) shakeOffset.y = shakeDistance;
-            if (shakeOffset.y < -shakeDistance) shakeOffset.y = -shakeDistance;
-            transform.position = initialPosition + shakeOffset;
         }
+        
     }
 
     public void StartShaking()

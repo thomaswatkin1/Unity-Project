@@ -6,15 +6,15 @@ public class UIControllerTitle : MonoBehaviour
 {
     public void Play()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Game");
     }
 
     public void Tutorial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("HowToPlay");
     }
-
-    public void Quit()
+    
+    public void Exit()
     {
         Debug.Log ("QUIT!");
         Application.Quit();
