@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         cameraController = Camera.main.GetComponent<CameraController>();
-        velocity.x = 10.0f;
+        velocity.x = 20.0f;
     }
 
     void Update()

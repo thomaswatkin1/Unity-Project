@@ -40,13 +40,18 @@ public class UIController : MonoBehaviour
         {
             if(canvasgroup.alpha < 1)
             {
-                canvasgroup.alpha += Time.deltaTime * 1.3f;
+                canvasgroup.alpha += Time.fixedDeltaTime * 1f;
                 if(canvasgroup.alpha >= 1)
                 {
                     fadeIn = false;
                 }
             }
         }
+    }
+
+    private void Switch()
+    {
+        
     }
 
     private void UpdateDistanceText()

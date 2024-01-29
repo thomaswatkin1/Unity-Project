@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-
+     
     public float speed = 10f;
 
     Vector3 startPos;
@@ -30,5 +29,5 @@ public class Background : MonoBehaviour
             }
         }
         
-    }   
+    }
 }
