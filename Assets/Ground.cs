@@ -14,6 +14,9 @@ public class Ground : MonoBehaviour
     bool didGenerateGround = false;
 
     public Obstacle boxTemplate;
+    //
+    public Obstacle boxTemplate1;   
+    //
 
     private void Awake()
     {
@@ -103,18 +106,37 @@ public class Ground : MonoBehaviour
         // }
 
 
+        int randomChoose = 0;
         int obstacleNum = Random.Range(0, 4);
-        for (int i=0; i<obstacleNum; i++)
+        for (int i = 0; i < obstacleNum; i++)
         {
-            GameObject box = Instantiate(boxTemplate.gameObject);
-            float y = goGround.groundHeight;
-            float halfWidth = goCollider.size.x / 2 - 1;
-            float left = go.transform.position.x - halfWidth;
-            float right = go.transform.position.x + halfWidth;
-            float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
-            float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
-            Vector2 boxPos = new Vector2(x, y);
-            box.transform.position = boxPos;
+            randomChoose = Random.Range(0, 2);
+            if (randomChoose == 0)
+            {
+                GameObject box = Instantiate(boxTemplate.gameObject);
+                float y = goGround.groundHeight;
+                float halfWidth = goCollider.size.x / 2 - 1;
+                float left = go.transform.position.x - halfWidth;
+                float right = go.transform.position.x + halfWidth;
+                float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+                float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
+                Vector2 boxPos = new Vector2(x, y);
+                box.transform.position = boxPos;
+            }
+            else
+            {
+                GameObject box2 = Instantiate(boxTemplate1.gameObject);
+                float y = goGround.groundHeight;
+                float halfWidth = goCollider.size.x / 2 - 1;
+                float left = go.transform.position.x - halfWidth;
+                float right = go.transform.position.x + halfWidth;
+                float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+                float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
+                Vector2 boxPos = new Vector2(x, y);
+                box2.transform.position = boxPos;
+            }
+            
+
 
             // if (fall != null)
             // {

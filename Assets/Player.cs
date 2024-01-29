@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
 
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
+    //
+    public LayerMask obstacle1LayerMask;
+    //
 
     CameraController cameraController;
 
@@ -213,7 +216,29 @@ public class Player : MonoBehaviour
             }
         }
 
-        transform.position = pos;
+        //
+        RaycastHit2D obstHitX1 = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacle1LayerMask);
+        if (obstHitX1.collider != null)
+        {
+            Obstacle obstacle = obstHitX1.collider.GetComponent<Obstacle>();
+            if (obstacle != null)
+            {
+                hitObstacle1(obstacle);
+            }
+        }
+
+        RaycastHit2D obstHitY1 = Physics2D.Raycast(obstOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, obstacle1LayerMask);
+        if (obstHitY1.collider != null)
+        {
+            Obstacle obstacle1 = obstHitY1.collider.GetComponent<Obstacle>();
+            if (obstacle1 != null)
+            {
+                hitObstacle1(obstacle1);
+            }
+        }
+        //
+
+        transform.position = pos; //what does this do
     }
 
 
@@ -221,5 +246,11 @@ public class Player : MonoBehaviour
     {
         Destroy(obstacle.gameObject);
         velocity.x *= 0.7f;
+    }
+
+    void hitObstacle1(Obstacle obstacle)
+    {
+        Destroy(obstacle.gameObject);
+        velocity.x *= 1.3f;
     }
 }
