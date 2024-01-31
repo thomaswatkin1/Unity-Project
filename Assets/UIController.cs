@@ -99,6 +99,6 @@ public class UIController : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("Main Game");
+        SceneManager.LoadScene("Game");
     }
 }

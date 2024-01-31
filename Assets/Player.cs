@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public LayerMask obstacleLayerMask;
     //
     public LayerMask obstacle1LayerMask;
+    public LayerMask obstacle2LayerMask;
     //
 
     CameraController cameraController;
@@ -220,10 +221,10 @@ public class Player : MonoBehaviour
         RaycastHit2D obstHitX1 = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacle1LayerMask);
         if (obstHitX1.collider != null)
         {
-            Obstacle obstacle = obstHitX1.collider.GetComponent<Obstacle>();
-            if (obstacle != null)
+            Obstacle obstacle1 = obstHitX1.collider.GetComponent<Obstacle>();
+            if (obstacle1 != null)
             {
-                hitObstacle1(obstacle);
+                hitObstacle1(obstacle1);
             }
         }
 
@@ -236,9 +237,29 @@ public class Player : MonoBehaviour
                 hitObstacle1(obstacle1);
             }
         }
+
+        RaycastHit2D obstHitX2 = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacle2LayerMask);
+        if (obstHitX2.collider != null)
+        {
+            Obstacle obstacle2 = obstHitX2.collider.GetComponent<Obstacle>();
+            if (obstacle2 != null)
+            {
+                hitObstacle2(obstacle2);
+            }
+        }
+
+        RaycastHit2D obstHitY2 = Physics2D.Raycast(obstOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, obstacle2LayerMask);
+        if (obstHitY2.collider != null)
+        {
+            Obstacle obstacle2 = obstHitY2.collider.GetComponent<Obstacle>();
+            if (obstacle2 != null)
+            {
+                hitObstacle2(obstacle2);
+            }
+        }
         //
 
-        transform.position = pos; //what does this do
+        transform.position = pos; 
     }
 
 
@@ -252,5 +273,11 @@ public class Player : MonoBehaviour
     {
         Destroy(obstacle.gameObject);
         velocity.x *= 1.3f;
+    }
+
+    void hitObstacle2(Obstacle obstacle)
+    {
+        Destroy(obstacle.gameObject);
+        velocity.x *= 100f; //change this or dont
     }
 }

@@ -706,6 +706,7 @@ MonoBehaviour:
   screenRight: 0
   boxTemplate: {fileID: 1984847803880576289, guid: 872e884d611f1594396d70a9e94f4f9b, type: 3}
   boxTemplate1: {fileID: 1984847803880576289, guid: 7e1b9185f3f85e345b5b1f95f51a55d8, type: 3}
+  boxTemplate2: {fileID: 1984847803880576289, guid: 6ef451141df466d479df10e9ba942426, type: 3}
 --- !u!4 &708046230
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,7 +1027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98.30002, y: -84.5}
+  m_AnchoredPosition: {x: 98.30005, y: -84.5}
   m_SizeDelta: {x: 258.78, y: -174.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862949395
@@ -2071,7 +2072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -122.600006, y: -84.5}
+  m_AnchoredPosition: {x: -122.599976, y: -84.5}
   m_SizeDelta: {x: 324.30798, y: -170.754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880861102
@@ -2463,6 +2464,9 @@ MonoBehaviour:
   obstacle1LayerMask:
     serializedVersion: 2
     m_Bits: 256
+  obstacle2LayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &2067783753
 Transform:
   m_ObjectHideFlags: 0
