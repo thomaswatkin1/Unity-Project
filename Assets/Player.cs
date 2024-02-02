@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float jumpVelocity = 20;
     public float groundHeight = 10;
     public bool isGrounded = false;
+    public float placeholder = 0;
 
     public bool isHoldingJump = false;
     public float maxHoldJumpTime = 0.4f;
@@ -103,9 +104,18 @@ public class Player : MonoBehaviour
             animator.SetBool("fallingdownwards", false);
         }
         temp = pos.y;
-        
-        if (!isGrounded)
+
+        if ((!isGrounded) || (placeholder > 0));
         {
+            if (placeholder > 0)
+            {
+                isGrounded = false;
+                velocity.y = jumpVelocity;
+                isHoldingJump = true;
+                holdJumpTimer = 0;
+                placeholder -= 1;
+            }
+
             if (isHoldingJump)
             {
                 holdJumpTimer += Time.fixedDeltaTime;
@@ -115,12 +125,18 @@ public class Player : MonoBehaviour
                 }
             }
 
+            // insert into statement above later
+
+            //
 
             pos.y += velocity.y * Time.fixedDeltaTime;
             if (!isHoldingJump)
             {
                 velocity.y += gravity * Time.fixedDeltaTime;
             }
+            //
+
+            
 
             Vector2 rayOrigin = new Vector2(pos.x + 0.7f, pos.y);
             Vector2 rayDirection = Vector2.up;
@@ -278,6 +294,6 @@ public class Player : MonoBehaviour
     void hitObstacle2(Obstacle obstacle)
     {
         Destroy(obstacle.gameObject);
-        velocity.x *= 100f; //change this or dont
+        placeholder += 50;
     }
 }

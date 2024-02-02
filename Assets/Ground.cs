@@ -14,10 +14,9 @@ public class Ground : MonoBehaviour
     bool didGenerateGround = false;
 
     public Obstacle boxTemplate;
-    //
     public Obstacle boxTemplate1;
     public Obstacle boxTemplate2;
-    //
+
 
     private void Awake()
     {
@@ -93,38 +92,24 @@ public class Ground : MonoBehaviour
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (goCollider.size.y / 2);
 
-        // GroundFall fall = go.GetComponent<GroundFall>();
-        // if (fall != null)
-        // {
-        //     Destroy(fall);
-        //     fall = null;
-        // }
-
-        // if (Random.Range(0,3) == 0)
-        // {
-        //     fall = go.AddComponent<GroundFall>();
-        //     fall.fallSpeed = Random.Range(1.0f, 3.0f);
-        // }
-
-
         int randomChoose = 0;
         int obstacleNum = Random.Range(0, 4);
         for (int i = 0; i < obstacleNum; i++)
         {
-            randomChoose = Random.Range(0, 10);
-            if (randomChoose < 5)
+            randomChoose = Random.Range(0, 3);
+            if (randomChoose < 1)
             {
                 GameObject box = Instantiate(boxTemplate.gameObject);
                 float y = goGround.groundHeight;
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box.transform.position = boxPos;
             }
-            else if (randomChoose < 9)
+            else if (randomChoose < 2)
             {
                 GameObject box2 = Instantiate(boxTemplate1.gameObject);
                 float y = goGround.groundHeight;
@@ -148,14 +133,6 @@ public class Ground : MonoBehaviour
                 Vector2 boxPos = new Vector2(x, y);
                 box3.transform.position = boxPos;
             }
-            
-
-
-            // if (fall != null)
-            // {
-            //     Obstacle o = box.GetComponent<Obstacle>();
-            //     fall.obstacles.Add(o);
-            // }
         }        
     }
 }
