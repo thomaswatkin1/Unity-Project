@@ -131,7 +131,7 @@ public class Ground : MonoBehaviour
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box2.transform.position = boxPos;
@@ -143,7 +143,7 @@ public class Ground : MonoBehaviour
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 4f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box3.transform.position = boxPos;

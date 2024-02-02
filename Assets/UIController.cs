@@ -24,13 +24,6 @@ public class UIController : MonoBehaviour
         results = GameObject.Find("Results");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     private void Update()
     {
         UpdateDistanceText();
@@ -47,11 +40,6 @@ public class UIController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void Switch()
-    {
-        
     }
 
     private void UpdateDistanceText()
@@ -99,6 +87,7 @@ public class UIController : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("Game");
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
     }
 }
