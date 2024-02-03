@@ -27,11 +27,6 @@ public class UIControllerTitle : MonoBehaviour
         }
     }
 
-    public void Tutorial()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("HowToPlay");
-    }
-
     public void Exit()
     {
         Debug.Log("QUIT!");

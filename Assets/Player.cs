@@ -5,10 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Animator animator;
-    public float temp = 0;
-
-    public float gravity;
     public Vector2 velocity;
+
+    public float fall = 0;
+    public float gravity;
     public float maxXVelocity = 100;
     public float maxAcceleration = 10;
     public float acceleration = 10;
@@ -17,29 +17,22 @@ public class Player : MonoBehaviour
     public float jumpVelocity = 20;
     public float groundHeight = 10;
     public bool isGrounded = false;
-    public float placeholder = 0;
-
+    public float boost = 0;
     public bool isHoldingJump = false;
     public float maxHoldJumpTime = 0.4f;
     public float maxMaxHoldJumpTime = 0.4f;
     public float holdJumpTimer = 0.0f;
-
     public float jumpGroundThreshold = 1;
 
     public bool isDead = false;
 
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
-    //
     public LayerMask obstacle1LayerMask;
     public LayerMask obstacle2LayerMask;
-    //
-
-    CameraController cameraController;
 
     void Start()
     {
-        cameraController = Camera.main.GetComponent<CameraController>();
         velocity.x = 20.0f;
     }
 
@@ -50,7 +43,7 @@ public class Player : MonoBehaviour
 
         Vector2 pos = transform.position;
         float groundDistance = Mathf.Abs(pos.y - groundHeight);
-
+        
         if (isGrounded || groundDistance <= jumpGroundThreshold)
         {
             if (Input.GetKey(KeyCode.Space) && groundDistance <= maxJumpDistance && isGrounded)
@@ -59,13 +52,6 @@ public class Player : MonoBehaviour
                 velocity.y = jumpVelocity;
                 isHoldingJump = true;
                 holdJumpTimer = 0;
-
-                // if (fall != null)
-                // {
-                //     fall.player = null;
-                //     fall = null;
-                //     cameraController.StopShaking();
-                // }
             }
         }
 
@@ -73,9 +59,6 @@ public class Player : MonoBehaviour
         {
             isHoldingJump = false;
         }
-
-
-
     }
 
     private void FixedUpdate()
@@ -86,16 +69,12 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
         if (pos.y < -40)
         {
             isDead = true;
             velocity.x = 0;
-
         }
-
-
-        if (temp > pos.y)
+        if (fall > pos.y)
         {
             animator.SetBool("fallingdownwards", true);
         }
@@ -103,17 +82,18 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("fallingdownwards", false);
         }
-        temp = pos.y;
+        fall = pos.y;
 
-        if ((!isGrounded) || (placeholder > 0));
+        if ((!isGrounded) || (boost > 0))
         {
-            if (placeholder > 0)
+            // Jump physics
+            if (boost > 0)
             {
                 isGrounded = false;
                 velocity.y = jumpVelocity;
                 isHoldingJump = true;
                 holdJumpTimer = 0;
-                placeholder -= 1;
+                boost -= 1;
             }
 
             if (isHoldingJump)
@@ -125,18 +105,11 @@ public class Player : MonoBehaviour
                 }
             }
 
-            // insert into statement above later
-
-            //
-
             pos.y += velocity.y * Time.fixedDeltaTime;
             if (!isHoldingJump)
             {
                 velocity.y += gravity * Time.fixedDeltaTime;
             }
-            //
-
-            
 
             Vector2 rayOrigin = new Vector2(pos.x + 0.7f, pos.y);
             Vector2 rayDirection = Vector2.up;
@@ -154,13 +127,6 @@ public class Player : MonoBehaviour
                         velocity.y = 0;
                         isGrounded = true;
                     }
-
-                    // fall = ground.GetComponent<GroundFall>();
-                    // if (fall != null)
-                    // {
-                    //     fall.player = this;
-                    //     // cameraController.StartShaking();
-                    // }
                 }
             }
 
@@ -184,6 +150,7 @@ public class Player : MonoBehaviour
 
         distance += velocity.x * Time.fixedDeltaTime;
 
+        // Running physics
         if (isGrounded)
         {
             float velocityRatio = velocity.x / maxXVelocity;
@@ -199,19 +166,16 @@ public class Player : MonoBehaviour
             Vector2 rayOrigin = new Vector2(pos.x - 0.7f, pos.y);
             Vector2 rayDirection = Vector2.up;
             float rayDistance = velocity.y * Time.fixedDeltaTime;
-            // if (fall != null)
-            // {
-            //     rayDistance = -fall.fallSpeed * Time.fixedDeltaTime;
-            // }
             RaycastHit2D hit2D = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance, groundLayerMask);
             if (hit2D.collider == null)
             {
                 isGrounded = false;
             }
             Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.yellow);
-
         }
 
+
+        // Obstacle physics
         Vector2 obstOrigin = new Vector2(pos.x, pos.y);
         RaycastHit2D obstHitX = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacleLayerMask);
         if (obstHitX.collider != null)
@@ -233,7 +197,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        //
         RaycastHit2D obstHitX1 = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacle1LayerMask);
         if (obstHitX1.collider != null)
         {
@@ -273,12 +236,12 @@ public class Player : MonoBehaviour
                 hitObstacle2(obstacle2);
             }
         }
-        //
 
-        transform.position = pos; 
+        // Move player
+        transform.position = pos;
     }
 
-
+    // Effects of obstacle on player
     void hitObstacle(Obstacle obstacle)
     {
         Destroy(obstacle.gameObject);
@@ -294,6 +257,6 @@ public class Player : MonoBehaviour
     void hitObstacle2(Obstacle obstacle)
     {
         Destroy(obstacle.gameObject);
-        placeholder += 50;
+        boost += 50;
     }
 }

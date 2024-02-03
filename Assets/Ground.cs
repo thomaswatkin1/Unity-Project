@@ -17,7 +17,6 @@ public class Ground : MonoBehaviour
     public Obstacle boxTemplate1;
     public Obstacle boxTemplate2;
 
-
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -26,7 +25,6 @@ public class Ground : MonoBehaviour
         screenRight = Camera.main.transform.position.x * 2;
     }
 
-    // Update is called once per frame
     void Update()
     {
         groundHeight = transform.position.y + (collider.size.y / 2);
@@ -34,9 +32,9 @@ public class Ground : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Ground physics
         Vector2 pos = transform.position;
         pos.x -= player.velocity.x * Time.fixedDeltaTime;
-
 
         groundRight = transform.position.x + (collider.size.x / 2);
 
@@ -60,6 +58,7 @@ public class Ground : MonoBehaviour
 
     void generateGround()
     {
+        // Ground generation calculations
         GameObject go = Instantiate(gameObject);
         BoxCollider2D goCollider = go.GetComponent<BoxCollider2D>();
         Vector2 pos;
@@ -76,7 +75,6 @@ public class Ground : MonoBehaviour
         pos.y = actualY - goCollider.size.y / 2;
         if (pos.y > 2.7f)
             pos.y = 2.7f;
-
         float t1 = t + player.maxHoldJumpTime;
         float t2 = Mathf.Sqrt((2.0f * (maxY - actualY)) / -player.gravity);
         float totalTime = t1 + t2;
@@ -92,6 +90,7 @@ public class Ground : MonoBehaviour
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (goCollider.size.y / 2);
 
+        // Obstacle generation
         int randomChoose = 0;
         int obstacleNum = Random.Range(0, 4);
         for (int i = 0; i < obstacleNum; i++)
@@ -104,11 +103,12 @@ public class Ground : MonoBehaviour
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f;
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box.transform.position = boxPos;
             }
+
             else if (randomChoose < 2)
             {
                 GameObject box2 = Instantiate(boxTemplate1.gameObject);
@@ -116,11 +116,12 @@ public class Ground : MonoBehaviour
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f;
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box2.transform.position = boxPos;
             }
+
             else
             {
                 GameObject box3 = Instantiate(boxTemplate2.gameObject);
@@ -128,7 +129,7 @@ public class Ground : MonoBehaviour
                 float halfWidth = goCollider.size.x / 2 - 1;
                 float left = go.transform.position.x - halfWidth;
                 float right = go.transform.position.x + halfWidth;
-                float minDistanceFromEdge = 10f; // Adjust this value based on the desired minimum distance
+                float minDistanceFromEdge = 10f;
                 float x = Random.Range(left + minDistanceFromEdge, right - minDistanceFromEdge);
                 Vector2 boxPos = new Vector2(x, y);
                 box3.transform.position = boxPos;

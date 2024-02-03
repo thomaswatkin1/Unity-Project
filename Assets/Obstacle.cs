@@ -13,9 +13,10 @@ public class Obstacle : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Obstacle positioning
         Vector2 pos = transform.position;
-
         pos.x -= player.velocity.x * Time.fixedDeltaTime;
+        
         if (pos.x < -100)
         {
             Destroy(gameObject);

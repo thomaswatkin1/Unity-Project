@@ -514,7 +514,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448325481}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -659,7 +659,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -741,20 +740,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0ffdbf7c7703249963a31cbc171926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shakeDistance: 0.2
-  shakeSpeed: 10
 --- !u!1 &708046228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7f0155277edab1147b9d9c39f95b780b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.99215686}
   m_FlipX: 0
@@ -1285,7 +1270,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7f0155277edab1147b9d9c39f95b780b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2018,7 +2003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: -17.2, y: 2.9}
   m_SizeDelta: {x: 1199.763, y: 694.4227}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2034145285
@@ -2253,9 +2238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1875308991}
-  temp: 0
-  gravity: -400
   velocity: {x: 0, y: 0}
+  fall: 0
+  gravity: -400
   maxXVelocity: 100
   maxAcceleration: 10
   acceleration: 10
@@ -2264,6 +2249,7 @@ MonoBehaviour:
   jumpVelocity: 50
   groundHeight: 10
   isGrounded: 0
+  boost: 0
   isHoldingJump: 0
   maxHoldJumpTime: 0.4
   maxMaxHoldJumpTime: 0.4
